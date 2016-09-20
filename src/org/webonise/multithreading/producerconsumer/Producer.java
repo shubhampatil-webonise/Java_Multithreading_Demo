@@ -3,7 +3,7 @@ package org.webonise.multithreading.producerconsumer;
 import java.util.Queue;
 
 public class Producer implements Runnable {
-    Queue<Integer> queue;
+    private final Queue<Integer> queue;
 
     Producer(Queue<Integer> queue){
         this.queue = queue;
@@ -30,7 +30,7 @@ public class Producer implements Runnable {
             try{
                 queue.wait();
             }catch (InterruptedException e){
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

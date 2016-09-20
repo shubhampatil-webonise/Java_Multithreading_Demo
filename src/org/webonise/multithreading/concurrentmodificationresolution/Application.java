@@ -34,7 +34,7 @@ public class Application {
 
             thread.join();
         }catch (InterruptedException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

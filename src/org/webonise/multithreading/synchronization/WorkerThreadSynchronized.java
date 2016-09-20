@@ -2,7 +2,7 @@ package org.webonise.multithreading.synchronization;
 
 public class WorkerThreadSynchronized implements Runnable {
 
-    private ThreadPrinterSychronized threadPrinter;
+    private final ThreadPrinterSychronized threadPrinter;
 
     WorkerThreadSynchronized(ThreadPrinterSychronized threadPrinter){
         this.threadPrinter = threadPrinter;

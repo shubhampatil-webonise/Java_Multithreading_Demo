@@ -13,7 +13,7 @@ public class Application {
                 System.out.println("In main thread. Waiting for notification from worker thread ...");
                 thread.wait();
             }catch (InterruptedException e){
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 

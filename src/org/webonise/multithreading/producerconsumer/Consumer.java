@@ -4,7 +4,7 @@ import java.util.Queue;
 import java.util.Random;
 
 public class Consumer implements Runnable{
-    Queue<Integer> queue;
+    private final Queue<Integer> queue;
 
     Consumer(Queue<Integer> queue){
         this.queue = queue;
@@ -30,7 +30,7 @@ public class Consumer implements Runnable{
                 try {
                     queue.wait();
                 }catch (InterruptedException e){
-                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }
@@ -47,7 +47,7 @@ public class Consumer implements Runnable{
         try {
             Thread.sleep((new Random().nextInt(5))*1000);
         }catch (InterruptedException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

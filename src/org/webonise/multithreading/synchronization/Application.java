@@ -26,7 +26,7 @@ public class Application {
             try {
                 threads[i].join();
             }catch (InterruptedException e){
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -46,7 +46,7 @@ public class Application {
             try {
                 threads[i].join();
             }catch (InterruptedException e){
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

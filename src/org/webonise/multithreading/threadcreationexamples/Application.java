@@ -17,7 +17,7 @@ public class Application {
             t1.join();
             t2.join();
         }catch (InterruptedException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class Application {
 
-    private Queue<Integer> queue;
+    private final Queue<Integer> queue;
 
     Application(){
         queue = new LinkedList<>();
@@ -26,7 +26,7 @@ public class Application {
             firstConsumer.join();
             secondConsumer.join();
         }catch (InterruptedException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
