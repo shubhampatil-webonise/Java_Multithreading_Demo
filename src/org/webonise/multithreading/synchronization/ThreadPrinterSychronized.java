@@ -1,4 +1,4 @@
-package synchronization_demo;
+package org.webonise.multithreading.synchronization;
 
 public class ThreadPrinterSychronized {
 

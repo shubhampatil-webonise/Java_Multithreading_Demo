@@ -1,4 +1,4 @@
-package wait_and_notify_demo;
+package org.webonise.multithreading.waitandnotify;
 
 import java.util.Scanner;
 

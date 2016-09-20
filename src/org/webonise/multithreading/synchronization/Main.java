@@ -1,4 +1,4 @@
-package concurrent_modification_exception_demo;
+package org.webonise.multithreading.synchronization;
 
 public class Main {
     public static void main(String[] args){

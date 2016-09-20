@@ -1,4 +1,4 @@
-package producer_consumer_demo;
+package org.webonise.multithreading.concurrentmodificationexception;
 
 public class Main {
     public static void main(String[] args){

@@ -1,4 +1,4 @@
-package concurrent_modification_exception_demo;
+package org.webonise.multithreading.concurrentmodificationexception;
 import java.util.List;
 
 public class WorkerThread implements Runnable {

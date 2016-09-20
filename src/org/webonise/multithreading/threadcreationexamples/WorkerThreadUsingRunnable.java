@@ -1,4 +1,4 @@
-package multithreading_demo;
+package org.webonise.multithreading.threadcreationexamples;
 
 public class WorkerThreadUsingRunnable implements Runnable {
 

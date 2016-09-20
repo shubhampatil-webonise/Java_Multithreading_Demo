@@ -1,4 +1,4 @@
-package producer_consumer_demo;
+package org.webonise.multithreading.producerconsumer;
 
 import java.util.LinkedList;
 import java.util.Queue;

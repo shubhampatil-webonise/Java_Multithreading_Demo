@@ -1,4 +1,4 @@
-package concurrent_modification_exception_resolution_demo;
+package org.webonise.multithreading.concurrentmodificationresolution;
 
 import java.util.Iterator;
 import java.util.List;
