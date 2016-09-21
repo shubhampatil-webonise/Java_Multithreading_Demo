@@ -1,9 +1,12 @@
 package org.webonise.multithreading.concurrentmodificationresolution;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WorkerThread implements Runnable {
-    private List<Integer> list;
+    private final List<Integer> list;
+    private static final Logger logger = Logger.getLogger(WorkerThread.class.getName());
 
     WorkerThread(List<Integer> list){
         this.list = list;
@@ -17,7 +20,7 @@ public class WorkerThread implements Runnable {
             try {
                 Thread.sleep(100);
             }catch (InterruptedException e){
-                e.printStackTrace();
+                logger.log(Level.SEVERE, e.getMessage());
             }
         }
     }

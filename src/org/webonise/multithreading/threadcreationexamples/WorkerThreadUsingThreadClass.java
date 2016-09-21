@@ -1,7 +1,10 @@
 package org.webonise.multithreading.threadcreationexamples;
 
-public class WorkerThreadUsingThreadClass extends Thread {
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+public class WorkerThreadUsingThreadClass extends Thread {
+    private static final Logger logger = Logger.getLogger(WorkerThreadUsingThreadClass.class.getName());
     WorkerThreadUsingThreadClass(String threadName){
         super(threadName);
     }
@@ -11,7 +14,7 @@ public class WorkerThreadUsingThreadClass extends Thread {
         String threadName = Thread.currentThread().getName();
 
         for(int i=0; i < 100; i++){
-            System.out.println("Thread " + threadName + " says :" + i);
+            logger.log(Level.INFO, "Thread " + threadName + " says :" + i);
         }
     }
 }

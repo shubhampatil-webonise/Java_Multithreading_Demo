@@ -3,38 +3,59 @@ package org.webonise.multithreading.concurrentmodificationresolution;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Application {
-    private List<Integer> list;
+    private final List<Integer> list;
+    private static final Logger logger = Logger.getLogger(Application.class.getName());
 
-    Application(){
+    public Application() {
         list = new CopyOnWriteArrayList<>();
+    }
 
-        for (int i=0; i<100; i++){
+    public void start() {
+        populateList();
+        generateConcurrentModificationException();
+    }
+
+    private void populateList() {
+        for (int i = 0; i < 100; i++) {
             list.add(i);
         }
     }
 
-    public void start(){
-        iterateListAndLaunchThreadToModify();
+    private void generateConcurrentModificationException() {
+        Thread thread = launchThread();
+        iterateList();
+        waitForThreadToJoin(thread);
+        logger.log(Level.INFO, "Main thread is exiting now !");
     }
 
-    private void iterateListAndLaunchThreadToModify(){
-
-        Iterator iterator = list.iterator();
-
+    private Thread launchThread() {
         Thread thread = new Thread(new WorkerThread(list));
         thread.start();
+        return thread;
+    }
 
-        try{
-            while (iterator.hasNext()){
-                System.out.println(iterator.next());
+    private void iterateList() {
+        Iterator iterator = list.iterator();
+
+        try {
+            while (iterator.hasNext()) {
+                logger.log(Level.INFO, iterator.next().toString());
                 Thread.sleep(100);
             }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        }
+    }
 
+    private void waitForThreadToJoin(Thread thread) {
+        try {
             thread.join();
-        }catch (InterruptedException e){
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 }

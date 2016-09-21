@@ -2,6 +2,8 @@ package org.webonise.multithreading.diningphilosphers;
 
 import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Philosopher implements Runnable {
 
@@ -9,6 +11,7 @@ public class Philosopher implements Runnable {
     private final ReentrantLock leftChopstick;
     private final ReentrantLock rightChopstick;
     private boolean hasFinishedEating;
+    private static final Logger logger = Logger.getLogger(Philosopher.class.getName());
 
     Philosopher(int philosopherId, ReentrantLock leftChopstick, ReentrantLock rightChopstick){
         this.philosopherId = philosopherId;
@@ -39,22 +42,22 @@ public class Philosopher implements Runnable {
 
     public void finishEating(){
         hasFinishedEating = true;
-        System.out.println("Philosopher " + philosopherId + " will now finished eating.");
+        logger.log(Level.INFO, "Philosopher " + philosopherId + " will now finish eating.");
     }
 
     private void think() throws InterruptedException{
-        System.out.println("Philosopher " + philosopherId + " is now thinking.");
+        logger.log(Level.INFO, "Philosopher " + philosopherId + " is now thinking.");
         Thread.sleep(new Random().nextInt(1000));
     }
 
     private void eat() throws InterruptedException{
-        System.out.println("Philosopher " + philosopherId + " is now eating.");
+        logger.log(Level.INFO, "Philosopher " + philosopherId + " is now eating.");
         Thread.sleep(new Random().nextInt(1000));
     }
 
     private boolean acquireLeftChopstick(){
         if(leftChopstick.tryLock()){
-            System.out.println("Philosopher " + philosopherId + " has picked up left chopstick.");
+            logger.log(Level.INFO, "Philosopher " + philosopherId + " has picked up left chopstick.");
             return true;
         }
         return false;
@@ -62,7 +65,7 @@ public class Philosopher implements Runnable {
 
     private boolean acquireRightChopstick(){
         if(rightChopstick.tryLock()){
-            System.out.println("Philosopher " + philosopherId + " has picked up right chopstick.");
+            logger.log(Level.INFO, "Philosopher " + philosopherId + " has picked up right chopstick.");
             return true;
         }
         return false;
@@ -71,14 +74,14 @@ public class Philosopher implements Runnable {
     private void releaseLeftChopstick(){
         if(leftChopstick.isHeldByCurrentThread()){
             leftChopstick.unlock();
-            System.out.println("Philosopher " + philosopherId + " has put down left chopstick.");
+            logger.log(Level.INFO, "Philosopher " + philosopherId + " has put down left chopstick.");
         }
     }
 
     private void releaseRightChopstick(){
         if(rightChopstick.isHeldByCurrentThread()){
             rightChopstick.unlock();
-            System.out.println("Philosopher " + philosopherId + " has put down right chopstick.");
+            logger.log(Level.INFO, "Philosopher " + philosopherId + " has put down right chopstick.");
         }
     }
 }

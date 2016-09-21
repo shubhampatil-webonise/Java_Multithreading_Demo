@@ -1,6 +1,10 @@
 package org.webonise.multithreading.synchronization;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Application {
+    private static final Logger logger = Logger.getLogger(Application.class.getName());
 
     public void start(){
         runThreads();
@@ -15,7 +19,7 @@ public class Application {
         Thread[] threads = new Thread[5];
         ThreadPrinter threadPrinter = new ThreadPrinter();
 
-        System.out.println("\nResult of access without synchronization :");
+        logger.log(Level.INFO, "\nResult of access without synchronization :");
 
         for (int i=0; i<threads.length; i++){
             threads[i] = new Thread(new WorkerThread(threadPrinter), "Thread " + i);
@@ -26,7 +30,7 @@ public class Application {
             try {
                 threads[i].join();
             }catch (InterruptedException e){
-                e.printStackTrace();
+                logger.log(Level.SEVERE, e.getMessage());
             }
         }
     }
@@ -34,8 +38,7 @@ public class Application {
     private void runThreadsWithSynchronization(){
         Thread[] threads = new Thread[5];
         ThreadPrinterSychronized threadPrinter = new ThreadPrinterSychronized();
-
-        System.out.println("\nResult of access with synchronization :");
+        logger.log(Level.INFO, "\nResult of access with synchronization :");
 
         for (int i=0; i<threads.length; i++){
             threads[i] = new Thread(new WorkerThreadSynchronized(threadPrinter), "Thread " + i);
@@ -46,7 +49,7 @@ public class Application {
             try {
                 threads[i].join();
             }catch (InterruptedException e){
-                e.printStackTrace();
+                logger.log(Level.SEVERE, e.getMessage());
             }
         }
     }

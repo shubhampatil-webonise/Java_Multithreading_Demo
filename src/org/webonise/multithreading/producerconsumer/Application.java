@@ -2,12 +2,15 @@ package org.webonise.multithreading.producerconsumer;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Application {
 
     private final Queue<Integer> queue;
+    private static final Logger logger = Logger.getLogger(Application.class.getName());
 
-    Application(){
+    public Application() {
         queue = new LinkedList<>();
     }
 
@@ -26,7 +29,7 @@ public class Application {
             firstConsumer.join();
             secondConsumer.join();
         }catch (InterruptedException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 }

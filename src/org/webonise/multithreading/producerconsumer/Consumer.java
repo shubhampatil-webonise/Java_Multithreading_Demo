@@ -2,9 +2,12 @@ package org.webonise.multithreading.producerconsumer;
 
 import java.util.Queue;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Consumer implements Runnable{
     private final Queue<Integer> queue;
+    private static final Logger logger = Logger.getLogger(Consumer.class.getName());
 
     Consumer(Queue<Integer> queue){
         this.queue = queue;
@@ -30,7 +33,7 @@ public class Consumer implements Runnable{
                 try {
                     queue.wait();
                 }catch (InterruptedException e){
-                    e.printStackTrace();
+                    logger.log(Level.SEVERE, e.getMessage());
                 }
             }
         }
@@ -42,12 +45,12 @@ public class Consumer implements Runnable{
 
     private void processResource(int resource){
         String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + " processing resource :" + resource);
+        logger.log(Level.INFO, threadName + " processing resource :" + resource);
 
         try {
             Thread.sleep((new Random().nextInt(5))*1000);
         }catch (InterruptedException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 }

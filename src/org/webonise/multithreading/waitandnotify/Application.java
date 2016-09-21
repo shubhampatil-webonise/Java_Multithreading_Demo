@@ -1,22 +1,31 @@
 package org.webonise.multithreading.waitandnotify;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Application {
+    private final SharedItem sharedItem;
+    private static final Logger logger = Logger.getLogger(Application.class.getName());
+
+    public Application() {
+        this.sharedItem = new SharedItem();
+    }
 
     public void start(){
 
-        Thread thread = new Thread(new WorkerThread());
-        System.out.println("In main thread. Launching worker thread ...");
+        Thread thread = new Thread(new WorkerThread(sharedItem));
+        logger.log(Level.INFO, "In main thread. Launching worker thread ...");
         thread.start();
 
-        synchronized (thread){
+        synchronized (sharedItem) {
             try {
-                System.out.println("In main thread. Waiting for notification from worker thread ...");
-                thread.wait();
-            }catch (InterruptedException e){
-                e.printStackTrace();
+                logger.log(Level.INFO, "In main thread. Waiting for notification from worker thread ...");
+                sharedItem.wait();
+            } catch (InterruptedException e) {
+                logger.log(Level.SEVERE, e.getMessage());
             }
         }
 
-        System.out.println("In main thread. Notification received from worker thread. Exiting ...");
+        logger.log(Level.INFO, "In main thread. Notification received from worker thread. Exiting ...");
     }
 }
