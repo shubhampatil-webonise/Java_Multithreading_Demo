@@ -23,10 +23,10 @@ public class Application {
 
 
     public void start(){
-        assignChopsticksToPhilosophersAndStartThreads();
+        startPhilosopherThreads();
     }
 
-    private void assignChopsticksToPhilosophersAndStartThreads(){
+    private void startPhilosopherThreads() {
         for(int i=0; i < NUMBER_OF_PHILOSOPHERS; i++){
             philosophers[i] = new Philosopher(i, chopsticks[i], chopsticks[(i+1)%NUMBER_OF_PHILOSOPHERS]);
             threads[i] = new Thread(philosophers[i]);

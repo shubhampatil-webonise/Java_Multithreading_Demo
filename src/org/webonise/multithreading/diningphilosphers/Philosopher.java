@@ -31,7 +31,6 @@ public class Philosopher implements Runnable {
                         eat();
                         releaseRightChopstick();
                     }
-
                     releaseLeftChopstick();
                 }
             }
